@@ -21,7 +21,7 @@ arrangedContacts = (array) => {
 
 //convert timestamp to date format dd-mm-yyyy hourr:minutes am/pm
 const timeStampToDate = (date) => {
-    date = new Date(+date)
+    date = isNaN(new Date(date))?new Date(+date):new Date(date)
     const [month, day] = date.toLocaleDateString().split('/')
     const year = date.getFullYear();
     const [hr, mn] = date.toLocaleTimeString().split(':')
