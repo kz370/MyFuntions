@@ -32,3 +32,8 @@ const timeStampToDate = (date) => {
 
     return fullDate
 }
+
+//format currency
+const formatMoney = (e) => {
+    return e.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
