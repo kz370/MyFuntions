@@ -37,3 +37,26 @@ const timeStampToDate = (date) => {
 const formatMoney = (e) => {
     return e.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
+
+//calculate qibla from lon,lat
+function calculate(lat, lon) {
+	if (isNaN(lat-0.0) || isNaN(lon-0.0)) {
+		alert("Non-numeric entry/entries");
+		return "???";
+	}
+	if ((lat-0.0)>(90.0-0.0) || (lat-0.0)<(-90.0-0.0)) {
+		alert("Latitude must be between -90 and 90 degrees");
+		return "???";
+	}
+	if ((lon-0.0)>(180.0-0.0) || (lon-0.0)<(-180.0-0.0)) {
+		alert("Longitude must be between -180 and 180 degrees");
+		return "???";
+	}
+	if (Math.abs(lat-21.4)<Math.abs(0.0-0.01) && Math.abs(lon-39.8)<Math.abs(0.0-0.01)) return "Any";	//Mecca
+	phiK = 21.4*PI/180.0;
+	lambdaK = 39.8*PI/180.0;
+	phi = lat*PI/180.0;
+	lambda = lon*PI/180.0;
+	psi = 180.0/PI*Math.atan2(Math.sin(lambdaK-lambda),                Math.cos(phi)*Math.tan(phiK)-Math.sin(phi)*Math.cos(lambdaK-lambda));
+	return Math.round(psi);
+}
